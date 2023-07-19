@@ -54,9 +54,9 @@ To test push notifications, you will need to run the application on a physical d
 To build a standalone version of the app, use Expo's build service. Run the following command:
 
 ```bash
-expo build:ios
+npx expo build:ios
 # or for android
-expo build:android
+npx expo build:android
 ```
 
 Follow the prompts to upload your Apple Developer credentials and other necessary information. Expo will build your assets and compile your app in the cloud, providing you with a download URL for your IPA (iOS) or APK (Android) file when done.
