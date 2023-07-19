@@ -1,4 +1,5 @@
-const affirmations = [
+export const BACKGROUND_FETCH_TASK = 'daily-affirmation-notification';
+export const affirmations = [
     "I am worthy of love and respect",
     "I believe in my abilities",
     "I am proud of my accomplishments",
@@ -105,5 +106,3 @@ const affirmations = [
     "I am a guardian of my own happiness",
     "I am an embodiment of kindness and generosity"
 ];
-
-export default affirmations;

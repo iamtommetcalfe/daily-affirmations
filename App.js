@@ -1,16 +1,15 @@
 import React, { useEffect } from 'react';
-import * as BackgroundFetch from 'expo-background-fetch';
-import * as TaskManager from 'expo-task-manager';
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import HomeScreen from './screens/HomeScreen';
 import AddAffirmationScreen from './screens/AddAffirmationScreen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Notifications from 'expo-notifications';
-import affirmations from './affirmations';
+import * as BackgroundFetch from 'expo-background-fetch';
+import * as TaskManager from 'expo-task-manager';
+import { BACKGROUND_FETCH_TASK, affirmations } from './constants';
 
-const BACKGROUND_FETCH_TASK = 'daily-affirmation-notification';
-
+// Background fetch task
 TaskManager.defineTask(BACKGROUND_FETCH_TASK, async () => {
     try {
         const customAffirmations = JSON.parse(await AsyncStorage.getItem('customAffirmations')) || [];
@@ -31,10 +30,12 @@ TaskManager.defineTask(BACKGROUND_FETCH_TASK, async () => {
 
         return BackgroundFetch.Result.NewData;
     } catch (error) {
+        console.error("Failed to fetch new data in background fetch task: ", error);
         return BackgroundFetch.Result.Failed;
     }
 });
 
+// Background fetch task registration
 const registerBackgroundFetch = async () => {
     try {
         await BackgroundFetch.registerTaskAsync(BACKGROUND_FETCH_TASK, {
@@ -43,10 +44,11 @@ const registerBackgroundFetch = async () => {
             startOnBoot: true,
         });
     } catch (error) {
-        console.log('Error registering background fetch task:', error);
+        console.error('Error registering background fetch task:', error);
     }
 };
 
+// Notification permissions
 const requestNotificationPermissions = async () => {
     await Notifications.requestPermissionsAsync({
         ios: {

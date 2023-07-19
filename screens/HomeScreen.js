@@ -2,7 +2,8 @@ import React, { useState, useEffect, useLayoutEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { MaterialIcons } from '@expo/vector-icons';
-import affirmations from '../affirmations';
+import { affirmations } from '../constants';
+import { getRandomItem } from '../utils';  // new helper function
 
 const HomeScreen = ({ navigation }) => {
     const [affirmation, setAffirmation] = useState('');
@@ -25,10 +26,14 @@ const HomeScreen = ({ navigation }) => {
     }, [navigation]);
 
     const getRandomAffirmation = async () => {
-        const customAffirmations = JSON.parse(await AsyncStorage.getItem('customAffirmations')) || [];
-        const allAffirmations = [...affirmations, ...customAffirmations];
-        const randomAffirmation = allAffirmations[Math.floor(Math.random() * allAffirmations.length)];
-        setAffirmation(randomAffirmation);
+        try {
+            const customAffirmations = JSON.parse(await AsyncStorage.getItem('customAffirmations')) || [];
+            const allAffirmations = [...affirmations, ...customAffirmations];
+            const randomAffirmation = getRandomItem(allAffirmations);  // using helper function
+            setAffirmation(randomAffirmation);
+        } catch (error) {
+            console.error("Failed to fetch affirmation: ", error);
+        }
     };
 
     return (

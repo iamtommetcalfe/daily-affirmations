@@ -1,11 +1,11 @@
 # Daily Affirmations
 
-This is a simple React Native application built using Expo. The app displays a new affirmation each day and allows the user to add their own affirmations.
+This is a simple React Native application built using Expo. The app displays a new affirmation each day and allows the user to add their own constants.
 
 ## Features
 
 - Displays a new affirmation each day
-- Allows user to add their own affirmations
+- Allows user to add their own constants
 - Sends a push notification at a specific time with a new affirmation
 - Provides a "Refresh" button for instant affirmation change
 
@@ -22,13 +22,13 @@ To run this project locally, follow the steps below:
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/yourusername/daily-affirmations.git
+git clone https://github.com/yourusername/daily-constants.git
 ```
 
 2. Navigate into the project directory:
 
 ```bash
-cd daily-affirmations
+cd daily-constants
 ```
 
 3. Install the dependencies:
@@ -42,7 +42,7 @@ npm install
 4. Start the development server:
 
 ```bash
-expo start
+npx expo start
 ```
 
 ## Testing Notifications

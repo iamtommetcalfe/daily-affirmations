@@ -1,18 +1,25 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const AddAffirmationScreen = ({ navigation }) => {
     const [affirmation, setAffirmation] = useState('');
 
     const saveAffirmation = async () => {
+        if (affirmation.trim().length === 0) {
+            Alert.alert('Error', 'Please enter a non-empty affirmation.');
+            return;
+        }
+
         try {
             const customAffirmations = JSON.parse(await AsyncStorage.getItem('customAffirmations')) || [];
             customAffirmations.push(affirmation);
             await AsyncStorage.setItem('customAffirmations', JSON.stringify(customAffirmations));
+            Alert.alert('Success', 'Your affirmation has been saved.');
             navigation.goBack();
         } catch (error) {
             console.error(error);
+            Alert.alert('Error', 'There was a problem saving your affirmation.');
         }
     };
 
