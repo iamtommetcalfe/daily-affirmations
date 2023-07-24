@@ -15,7 +15,7 @@
     "@react-navigation/drawer": "^6.6.2",
     "@react-navigation/native": "^6.1.6",
     "@react-navigation/stack": "^6.3.16",
-    "expo": "~49.0.3",
+    "expo": "~49.0.4",
     "expo-background-fetch": "~11.3.0",
     "expo-notifications": "~0.20.1",
     "expo-status-bar": "~1.6.0",
